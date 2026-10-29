@@ -1,6 +1,44 @@
-let students = JSON.parse(localStorage.getItem("students")) || [];  
+
+let students = JSON.parse(localStorage.getItem("students")) || [];
+
 const studentForm = document.getElementById("studentForm");
 const studentTableBody = document.getElementById("studentTableBody");
+
+function renderStudents() {
+    studentTableBody.innerHTML = "";
+
+    students.forEach(function(student, index) {
+        const newRow = document.createElement("tr");
+
+        const nameCell = document.createElement("td");
+        nameCell.textContent = student.name;
+
+        const numberCell = document.createElement("td");
+        numberCell.textContent = student.number;
+
+        const departmentCell = document.createElement("td");
+        departmentCell.textContent = student.department;
+
+        const actionCell = document.createElement("td");
+        const deleteButton = document.createElement("button");
+
+        deleteButton.textContent = "Sil";
+
+        deleteButton.addEventListener("click", function() {
+            deleteStudent(index);
+        });
+
+        actionCell.appendChild(deleteButton);
+
+        newRow.appendChild(nameCell);
+        newRow.appendChild(numberCell);
+        newRow.appendChild(departmentCell);
+        newRow.appendChild(actionCell);
+
+        studentTableBody.appendChild(newRow);
+    });
+}
+
 
 studentForm.addEventListener("submit", function(event) {
     event.preventDefault();
@@ -9,16 +47,6 @@ studentForm.addEventListener("submit", function(event) {
     const number = document.getElementById("studentNumber").value;
     const department = document.getElementById("studentDepartment").value;
 
-    const newRow = document.createElement("tr");
-
-    newRow.innerHTML = `
-        <td>${name}</td>
-        <td>${number}</td>
-        <td>${department}</td>
-    `;
-
-    studentTableBody.appendChild(newRow);
-    
     const student = {
         name: name,
         number: number,
@@ -29,25 +57,18 @@ studentForm.addEventListener("submit", function(event) {
 
     localStorage.setItem("students", JSON.stringify(students));
 
-
+    renderStudents();
     studentForm.reset();
 });
 
-students.forEach(function(student) {
-    const newRow = document.createElement("tr");
 
-    const nameCell = document.createElement("td");
-    nameCell.textContent = student.name;
+function deleteStudent(index) {
+    students.splice(index, 1);
 
-    const numberCell = document.createElement("td");
-    numberCell.textContent = student.number;
+    localStorage.setItem("students", JSON.stringify(students));
 
-    const departmentCell = document.createElement("td");
-    departmentCell.textContent = student.department;
+    renderStudents();
+}
 
-    newRow.appendChild(nameCell);
-    newRow.appendChild(numberCell);
-    newRow.appendChild(departmentCell);
 
-    studentTableBody.appendChild(newRow);
-});
+renderStudents();
