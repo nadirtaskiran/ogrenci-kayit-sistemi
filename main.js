@@ -1,5 +1,6 @@
 
 const studentForm = document.getElementById("studentForm");
+const studentTableBody = document.getElementById("studentTableBody");
 
 studentForm.addEventListener("submit", function(event) {
     event.preventDefault();
@@ -8,7 +9,15 @@ studentForm.addEventListener("submit", function(event) {
     const number = document.getElementById("studentNumber").value;
     const department = document.getElementById("studentDepartment").value;
 
-    console.log("Ad Soyad:", name);
-    console.log("Öğrenci Numarası:", number);
-    console.log("Bölüm:", department);
+    const newRow = document.createElement("tr");
+
+    newRow.innerHTML = `
+        <td>${name}</td>
+        <td>${number}</td>
+        <td>${department}</td>
+    `;
+
+    studentTableBody.appendChild(newRow);
+
+    studentForm.reset();
 });
