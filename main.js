@@ -3,9 +3,12 @@ let students = JSON.parse(localStorage.getItem("students")) || [];
 
 const studentForm = document.getElementById("studentForm");
 const studentTableBody = document.getElementById("studentTableBody");
+const studentCount = document.getElementById("studentCount");
 
 function renderStudents() {
     studentTableBody.innerHTML = "";
+
+    studentCount.textContent = "Toplam Öğrenci: " + students.length;
 
     
     if (students.length === 0) {
