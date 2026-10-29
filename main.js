@@ -43,9 +43,16 @@ function renderStudents() {
 studentForm.addEventListener("submit", function(event) {
     event.preventDefault();
 
-    const name = document.getElementById("studentName").value;
-    const number = document.getElementById("studentNumber").value;
-    const department = document.getElementById("studentDepartment").value;
+
+const name = document.getElementById("studentName").value.trim();
+const number = document.getElementById("studentNumber").value.trim();
+const department = document.getElementById("studentDepartment").value.trim();
+
+if (!name || !number || !department) {
+    alert("Lütfen tüm alanları doğru şekilde doldurun!");
+    return;
+}
+
 
     const student = {
         name: name,
