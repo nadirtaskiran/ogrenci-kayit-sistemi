@@ -7,6 +7,22 @@ const studentTableBody = document.getElementById("studentTableBody");
 function renderStudents() {
     studentTableBody.innerHTML = "";
 
+    
+    if (students.length === 0) {
+        const emptyRow = document.createElement("tr");
+        const emptyCell = document.createElement("td");
+
+        emptyCell.colSpan = 4;
+        emptyCell.textContent = "Henüz kayıtlı öğrenci bulunmuyor.";
+        emptyCell.style.textAlign = "center";
+
+        emptyRow.appendChild(emptyCell);
+        studentTableBody.appendChild(emptyRow);
+
+        return;
+    }
+
+
     students.forEach(function(student, index) {
         const newRow = document.createElement("tr");
 
