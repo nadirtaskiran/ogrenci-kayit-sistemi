@@ -99,7 +99,16 @@ if (alreadyExists) {
 
 
 
+
 function deleteStudent(index) {
+    const confirmation = confirm(
+        "Bu öğrenciyi silmek istediğinize emin misiniz?"
+    );
+
+    if (!confirmation) {
+        return;
+    }
+
     students.splice(index, 1);
 
     localStorage.setItem("students", JSON.stringify(students));
@@ -108,6 +117,7 @@ function deleteStudent(index) {
 
     alert("Öğrenci başarıyla silindi!");
 }
+
 
 
 
