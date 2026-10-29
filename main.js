@@ -1,4 +1,4 @@
-
+let students = [];
 const studentForm = document.getElementById("studentForm");
 const studentTableBody = document.getElementById("studentTableBody");
 
@@ -18,6 +18,17 @@ studentForm.addEventListener("submit", function(event) {
     `;
 
     studentTableBody.appendChild(newRow);
+    
+    const student = {
+        name: name,
+        number: number,
+        department: department
+    };
+
+    students.push(student);
+
+    localStorage.setItem("students", JSON.stringify(students));
+
 
     studentForm.reset();
 });
