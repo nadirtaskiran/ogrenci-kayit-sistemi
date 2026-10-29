@@ -68,3 +68,41 @@ td {
 tr:hover {
     background-color: #f1f5f9;
 }
+
+/* Mobil uyumlu tasarım */
+@media (max-width: 600px) {
+    body {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    form {
+        padding: 15px;
+    }
+
+    label {
+        display: block;
+        margin-top: 10px;
+    }
+
+    input {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        margin: 8px 0;
+    }
+
+    button {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
