@@ -94,7 +94,9 @@ if (alreadyExists) {
 
     renderStudents();
     studentForm.reset();
+    alert("Öğrenci başarıyla eklendi!");
 });
+
 
 
 function deleteStudent(index) {
@@ -103,7 +105,10 @@ function deleteStudent(index) {
     localStorage.setItem("students", JSON.stringify(students));
 
     renderStudents();
+
+    alert("Öğrenci başarıyla silindi!");
 }
+
 
 
 renderStudents();
