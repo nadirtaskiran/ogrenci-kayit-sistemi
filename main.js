@@ -3,9 +3,28 @@ let students = JSON.parse(localStorage.getItem("students")) || [];
 
 const studentForm = document.getElementById("studentForm");
 const studentTableBody = document.getElementById("studentTableBody");
+const studentCount = document.getElementById("studentCount");
 
 function renderStudents() {
     studentTableBody.innerHTML = "";
+
+    studentCount.textContent = "Toplam Öğrenci: " + students.length;
+
+    
+    if (students.length === 0) {
+        const emptyRow = document.createElement("tr");
+        const emptyCell = document.createElement("td");
+
+        emptyCell.colSpan = 4;
+        emptyCell.textContent = "Henüz kayıtlı öğrenci bulunmuyor.";
+        emptyCell.style.textAlign = "center";
+
+        emptyRow.appendChild(emptyCell);
+        studentTableBody.appendChild(emptyRow);
+
+        return;
+    }
+
 
     students.forEach(function(student, index) {
         const newRow = document.createElement("tr");
@@ -54,6 +73,15 @@ if (!name || !number || !department) {
 }
 
 
+const alreadyExists = students.some(function(student) {
+    return student.number === number;
+});
+
+if (alreadyExists) {
+    alert("Bu öğrenci numarası zaten kayıtlı!");
+    return;
+}
+
     const student = {
         name: name,
         number: number,
@@ -66,16 +94,31 @@ if (!name || !number || !department) {
 
     renderStudents();
     studentForm.reset();
+    alert("Öğrenci başarıyla eklendi!");
 });
 
 
+
+
 function deleteStudent(index) {
+    const confirmation = confirm(
+        "Bu öğrenciyi silmek istediğinize emin misiniz?"
+    );
+
+    if (!confirmation) {
+        return;
+    }
+
     students.splice(index, 1);
 
     localStorage.setItem("students", JSON.stringify(students));
 
     renderStudents();
+
+    alert("Öğrenci başarıyla silindi!");
 }
+
+
 
 
 renderStudents();
