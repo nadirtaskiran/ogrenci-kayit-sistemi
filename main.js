@@ -1,4 +1,4 @@
-let students = [];
+let students = JSON.parse(localStorage.getItem("students")) || [];  
 const studentForm = document.getElementById("studentForm");
 const studentTableBody = document.getElementById("studentTableBody");
 
@@ -31,4 +31,23 @@ studentForm.addEventListener("submit", function(event) {
 
 
     studentForm.reset();
+});
+
+students.forEach(function(student) {
+    const newRow = document.createElement("tr");
+
+    const nameCell = document.createElement("td");
+    nameCell.textContent = student.name;
+
+    const numberCell = document.createElement("td");
+    numberCell.textContent = student.number;
+
+    const departmentCell = document.createElement("td");
+    departmentCell.textContent = student.department;
+
+    newRow.appendChild(nameCell);
+    newRow.appendChild(numberCell);
+    newRow.appendChild(departmentCell);
+
+    studentTableBody.appendChild(newRow);
 });
