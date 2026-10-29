@@ -54,6 +54,15 @@ if (!name || !number || !department) {
 }
 
 
+const alreadyExists = students.some(function(student) {
+    return student.number === number;
+});
+
+if (alreadyExists) {
+    alert("Bu öğrenci numarası zaten kayıtlı!");
+    return;
+}
+
     const student = {
         name: name,
         number: number,
